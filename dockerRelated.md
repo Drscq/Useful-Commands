@@ -17,11 +17,22 @@ docker run -it -p 8183:8183 your_image_name /bin/bash
     2.1 Handle Platform Mismatch
     If the platform mismatch issue persists, you can specify the platform explicitly:
     ```bash
-    docker run --platform linux/arm64 --entrypoint /bin/bash -p 8188:8188 -it triconverge-oram
+    docker run --platform linux/arm64 --entrypoint /bin/bash -p 2000:8188 -it -d triconverge-oram
     ```
     ```bash
-    docker run --platform linux/arm64 --entrypoint /bin/bash -p 8183:8183 -it triconverge-oram
+    docker run --platform linux/arm64 --entrypoint /bin/bash -p 2000:8183 -it -d triconverge-oram
     ```
+3. Access the Container with an Interactive Shell
+Use the docker exec command to open an interactive shell inside the running container:
+```bash
+docker exec -it <container_id_or_name> /bin/bash
+```
+4. Detach from the Container
+To exit the interactive shell without stopping the 
+```bash
+exit
+```
+
 
 Ah, got it! If a Docker container has exited and you want to restart it, here’s how you can do it:
 
