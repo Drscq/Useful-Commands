@@ -17,10 +17,10 @@ docker run -it -p 8183:8183 your_image_name /bin/bash
     2.1 Handle Platform Mismatch
     If the platform mismatch issue persists, you can specify the platform explicitly:
     ```bash
-    docker run --platform linux/arm64 --entrypoint /bin/bash -p 2000:8188 -it -d triconverge-oram
+    docker run --platform linux/arm64 --entrypoint /bin/bash -p 2000:2000 -it -d triconverge-oram
     ```
     ```bash
-    docker run --platform linux/arm64 --entrypoint /bin/bash -p 2000:8183 -it -d triconverge-oram
+    docker run --platform linux/arm64 --entrypoint /bin/bash -p 5000:5000 -it -d triconverge-oram
     ```
 3. Access the Container with an Interactive Shell
 Use the docker exec command to open an interactive shell inside the running container:
