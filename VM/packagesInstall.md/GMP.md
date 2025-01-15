@@ -1,7 +1,7 @@
-To install **GMP** locally in `/root/local/lib/libgmp.a`, follow these steps:
+To install **GMP** locally in `$HOME/local/lib/libgmp.a`, follow these steps:
 
 ---
-
+### Completely remove the old source directory (or run `make distclean` if available).
 ### **Step 1: Download GMP Source Code**
 Download the source code for GMP (GNU Multiple Precision Arithmetic Library):
 ```bash
