@@ -23,9 +23,9 @@ cd gmp-6.2.1
 ### **Step 3: Configure the Build**
 Configure the GMP library to install locally under `/root/local`:
 ```bash
-./configure --prefix=PREFIX=$HOME/local --enable-cxx
+./configure --prefix=$HOME/local --enable-cxx
 ```
-- `--prefix=PREFIX=$HOME/local` specifies the installation path.
+- `--prefix=$HOME/local` specifies the installation path.
 - `--enable-cxx` enables C++ support for GMP.
 
 ---
