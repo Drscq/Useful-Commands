@@ -18,7 +18,7 @@ Download and build NTL from source:
    ```bash
    wget https://libntl.org/ntl-11.5.1.tar.gz
    tar -xvzf ntl-11.5.1.tar.gz
-   cd ntl-11.5.1
+   cd ntl-11.5.1/src
    ```
 
 2. **Configure NTL:**
