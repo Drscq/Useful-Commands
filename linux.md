@@ -7,4 +7,11 @@ cat /etc/os-release
     ```bash
     sudo netstat -tuln | grep 8183
     ```
-    
+3. Add the New User
+    ```bash
+    sudo adduser username
+    ```
+    3.1 Add the User to the sudo Group
+    ```bash
+    sudo usermod -aG sudo username
+    ```
