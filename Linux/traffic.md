@@ -10,6 +10,13 @@ sudo tc qdisc add dev lo root handle 1: htb default 10
 sudo tc class add dev lo parent 1: classid 1:10 htb rate 60mbit ceil 60mbit
 ```
 
+The following one for the 80Mbps limit without the "Warning: sch_htb: quantum of class 10010 is big. Consider r2q change."
+```bash
+sudo tc qdisc add dev lo root handle 1: htb default 10 r2q 100
+sudo tc class add dev lo parent 1: classid 1:10 htb rate 80mbit ceil 80mbit
+``` 
+
+
 ### Verify
 ```bash
 tc qdisc show dev lo
