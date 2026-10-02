@@ -31,9 +31,9 @@ colab --auth=oauth2 sessions
 
 首次运行会显示 Google 授权链接。用户需在浏览器中选择账号并完成同意流程，然后将页面给出的代码粘贴到发起命令的本地终端。`sessions` 用于列出会话；这个首次授权流程不需要先创建 VM。OAuth token 缓存在 `~/.config/colab-cli/token.json`。不要把授权代码、token 或凭据文件复制到仓库、日志或提示词中。
 
-OAuth2 还需要 CLI 能读取 OAuth client JSON 配置。`colab --help` 提供 `--client-oauth-config`（短选项 `-c`）；bundled skill 列出的默认位置是 `~/.colab-cli-oauth-config.json`。该配置和 token 都留在本机，不要放进仓库。
+本机不需要另行准备 OAuth client JSON。安装版源码在默认外部配置 `~/.colab-cli-oauth-config.json` 不存在时，会回退到随包提供的 `colab_cli/oauth_config.json`；本机使用这份 bundled 配置。`--client-oauth-config`（短选项 `-c`）可用于显式指定自定义配置文件，是可选覆盖项。
 
-安装版帮助和 `colab skill` 中提到的默认认证方式存在差异：后者的文本写 ADC 为默认值，而本机 `colab --help` 明确报告 OAuth2 是默认值。对本机已安装的 0.7.4，按照实际帮助使用 `--auth=oauth2`，并在升级后重新查看 `colab --help`。
+安装版帮助和 `colab skill` 文本存在两处差异：本机 `colab --help` 报告 OAuth2 为默认认证方式，但 bundled skill 写 ADC 为默认方式，并称 OAuth client JSON 是必需的。已安装的 0.7.4 源码显示外部 JSON 缺失时会回退到包内配置，因此该 JSON 要求也与本机实现不符。按本机帮助显式使用 `--auth=oauth2`，升级后重新查看 `colab --help` 和对应版本的实现。
 
 如果已有 Google Cloud SDK 和 ADC 环境，也可以显式选择 ADC，并按 Colab 所需 scopes 登录：
 

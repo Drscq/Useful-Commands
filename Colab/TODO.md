@@ -1,5 +1,9 @@
 # Google Colab CLI 待办
 
+## 当前使用状态
+
+尚未完成 Google OAuth 授权或创建云端 runtime；目前没有请求或使用任何付费、GPU、TPU 或 high-memory 资源。
+
 ## 已完成
 
 - [x] 在 macOS Apple Silicon 上使用 Homebrew 安装 `uv` 0.12.22。
@@ -10,7 +14,7 @@
 
 ## 尚待本人操作
 
-- [ ] **首次 Google OAuth2 授权**：在本机终端运行下列命令；打开显示的 Google 授权链接，选择账号并同意，然后把网页返回的代码粘贴回该终端。这个步骤只认证并列出会话，不会创建 VM。若 CLI 找不到 OAuth client JSON，按 `colab --help` 中的 `--client-oauth-config` / `-c` 选项提供本机配置；不要将配置文件加入仓库。
+- [ ] **首次 Google OAuth2 授权**：在本机终端运行下列命令；打开显示的 Google 授权链接，选择账号并同意，然后把网页返回的代码粘贴回该终端。这个步骤只认证并列出会话，不会创建 VM；此安装使用包内 OAuth client 配置，无需另行准备 JSON 文件。
 
   ```sh
   colab --auth=oauth2 sessions
