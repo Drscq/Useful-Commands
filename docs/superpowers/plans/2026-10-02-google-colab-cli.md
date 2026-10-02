@@ -15,34 +15,34 @@
 **Files:**
 - No repository files. Install `uv` and the Colab CLI into user-level tool locations.
 
-- [ ] **Step 1: Install uv if missing**
+- [x] **Step 1: Install uv if missing**
 
 Run `brew install uv` only if `command -v uv` returns no path.
 
-- [ ] **Step 2: Install the official CLI**
+- [x] **Step 2: Install the official CLI**
 
 Run `uv tool install google-colab-cli`.
 
-- [ ] **Step 3: Verify the executable**
+- [x] **Step 3: Verify the executable**
 
-Run `colab --version` and `colab --help`. Record the version and ensure the help output lists session and execution commands.
+Run `colab version` and `colab --help`. The installed CLI reports version 0.7.4; help lists session and execution commands. The supported version command is `colab version`.
 
 ### Task 2: Check authentication and perform a bounded cloud verification
 
 **Files:**
 - No repository files. Authentication state remains in the user's home directory.
 
-- [ ] **Step 1: Check available authentication tooling**
+- [x] **Step 1: Check available authentication tooling**
 
-Run `command -v gcloud` and inspect `colab --help` for the installed release's authentication options. Do not print credential files or token contents.
+Run `command -v gcloud` and inspect `colab --help` for the installed release's authentication options. Do not print credential files or token contents. On this Mac, `gcloud` is absent and `colab --help` reports `oauth2` as the default. No `gcloud` installation is needed for the OAuth2 route.
 
 - [ ] **Step 2: Authenticate only with supported official flow**
 
-If ADC is the applicable route and `gcloud` is present, use the official Colab CLI agent instructions to create ADC with the required Colab scopes. If a browser login is required, open the official login flow and let the user complete account selection and consent. Do not place credentials in repository files.
+For this installed release, start the first-use browser consent flow with `colab --auth=oauth2 sessions`. The user selects an account, grants consent, and pastes the returned code into the terminal. This command can authenticate and list sessions without creating a VM. The bundled upstream skill text describes ADC as its default, which differs from this installed CLI's help; pass `--auth=oauth2` explicitly. If an existing Google Cloud setup uses ADC instead, use the official Colab CLI instructions and required scopes. Do not place credentials in repository files.
 
 - [ ] **Step 3: Run a short CPU smoke test only if authenticated**
 
-Create a named CPU session with `colab new -s useful-commands-smoke`, run `printf 'print(1 + 1)\n' | colab exec -s useful-commands-smoke`, inspect it with `colab status -s useful-commands-smoke`, then run `colab stop -s useful-commands-smoke`. Confirm output `2` and confirm the session is stopped. If account authentication or allocation is unavailable, record the exact prerequisite and leave the runtime smoke test incomplete.
+Create a named CPU session with `colab --auth=oauth2 new -s useful-commands-smoke`, run `printf 'print(1 + 1)\n' | colab --auth=oauth2 exec -s useful-commands-smoke`, inspect it with `colab --auth=oauth2 status -s useful-commands-smoke`, then run `colab --auth=oauth2 stop -s useful-commands-smoke`. Confirm output `2` and confirm the session is stopped. If account authentication or allocation is unavailable, record the exact prerequisite and leave the runtime smoke test incomplete.
 
 ### Task 3: Add installation and agent guidance
 
@@ -51,15 +51,15 @@ Create a named CPU session with `colab new -s useful-commands-smoke`, run `print
 - Create: `Colab/installation.md` — actual Mac environment, successful install commands, version check, authentication route, validation outcome, upgrade and uninstall.
 - Create: `Colab/agent-usage.md` — shell-based Claude Code/Codex examples, task prompt, identity and permission boundaries, resource and runtime limits, file transfer and interactive-auth details.
 
-- [ ] **Step 1: Record verified install and auth steps**
+- [x] **Step 1: Record verified install and auth steps**
 
 Write `Colab/installation.md` from the actual outputs and actions in Tasks 1–2. Distinguish local installation verification from cloud runtime verification.
 
-- [ ] **Step 2: Document agent invocation and constraints**
+- [x] **Step 2: Document agent invocation and constraints**
 
 Write `Colab/agent-usage.md` with examples using `colab new`, `colab exec -f`, `colab download`, and `colab stop`. State that agents need local terminal permission and a pre-authenticated local Google identity; include the rule to stop sessions and avoid submitting secrets or untrusted scripts.
 
-- [ ] **Step 3: Add the overview**
+- [x] **Step 3: Add the overview**
 
 Write `Colab/README.md` with links to the other three files and a minimal CPU job example whose cleanup command is explicit.
 
@@ -68,14 +68,14 @@ Write `Colab/README.md` with links to the other three files and a minimal CPU jo
 **Files:**
 - Create: `Colab/TODO.md` — completed setup tasks and only remaining user decisions or follow-up work.
 
-- [ ] **Step 1: Write status-based TODO items**
+- [x] **Step 1: Write status-based TODO items**
 
 Mark successful local installation and checks complete. Mark account login, cloud smoke test, or GPU entitlement checks complete only when observed; otherwise describe the exact user action that remains.
 
-- [ ] **Step 2: Review documentation consistency**
+- [x] **Step 2: Review documentation consistency**
 
 Run `git diff --check`; inspect the four files for consistent command names, accurate completion states, absent secrets, working relative links, and no discarded error history.
 
-- [ ] **Step 3: Report the result**
+- [x] **Step 3: Report the result**
 
 Summarize the CLI version, whether a cloud session was verified and stopped, created files, and any remaining account-dependent TODO.
