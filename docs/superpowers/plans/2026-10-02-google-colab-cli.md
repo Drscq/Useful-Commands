@@ -36,13 +36,13 @@ Run `colab version` and `colab --help`. The installed CLI reports version 0.7.4;
 
 Run `command -v gcloud` and inspect `colab --help` for the installed release's authentication options. Do not print credential files or token contents. On this Mac, `gcloud` is absent and `colab --help` reports `oauth2` as the default. No `gcloud` installation is needed for the OAuth2 route.
 
-- [ ] **Step 2: Authenticate only with supported official flow**
+- [x] **Step 2: Authenticate only with supported official flow**
 
-For this installed release, start the first-use browser consent flow with `colab --auth=oauth2 sessions`. The user selects an account, grants consent, and pastes the returned code into the terminal. This command can authenticate and list sessions without creating a VM. The bundled upstream skill text describes ADC as its default, which differs from this installed CLI's help; pass `--auth=oauth2` explicitly. If an existing Google Cloud setup uses ADC instead, use the official Colab CLI instructions and required scopes. Do not place credentials in repository files.
+For this installed release, start the first-use browser consent flow with `colab --auth=oauth2 sessions`. The user selects an account, grants consent, and pastes the returned code into the terminal. This command can authenticate and list sessions without creating a VM. The bundled upstream skill text describes ADC as its default, which differs from this installed CLI's help; pass `--auth=oauth2` explicitly. If an existing Google Cloud setup uses ADC instead, use the official Colab CLI instructions and required scopes. Do not place credentials in repository files. The user completed OAuth2 authorization and the sessions command succeeded.
 
-- [ ] **Step 3: Run a short CPU smoke test only if authenticated**
+- [x] **Step 3: Run a short CPU smoke test only if authenticated**
 
-Create a named CPU session with `colab --auth=oauth2 new -s useful-commands-smoke`, run `printf 'print(1 + 1)\n' | colab --auth=oauth2 exec -s useful-commands-smoke`, inspect it with `colab --auth=oauth2 status -s useful-commands-smoke`, then run `colab --auth=oauth2 stop -s useful-commands-smoke`. Confirm output `2` and confirm the session is stopped. If account authentication or allocation is unavailable, record the exact prerequisite and leave the runtime smoke test incomplete.
+Created `useful-commands-smoke` on standard CPU. `exec` printed `2`; status showed CPU, Standard, IDLE; `stop` returned `Session terminated`; a subsequent `colab --auth=oauth2 sessions` no longer listed the smoke session. An unrelated pre-existing A100 high-memory assignment marked `[?]` remained and was left untouched.
 
 ### Task 3: Add installation and agent guidance
 

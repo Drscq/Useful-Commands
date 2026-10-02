@@ -2,11 +2,11 @@
 
 Google Colab CLI 是 Google 官方维护的命令行工具，可从本地终端创建 Colab 云端 runtime、执行 Python、管理远端文件。它适用于 macOS 和 Linux；Windows 当前不受支持。本目录记录这台 Apple Silicon Mac 上的本地安装结果、待办事项，以及供 Claude Code、Codex 等终端 agent 参考的操作边界。
 
-本机已安装 `google-colab-cli` 0.7.4，并确认 `colab version` 与 `colab --help` 可运行。首次 Google OAuth 授权和云端 CPU runtime 尚未完成，所以这里没有声称云端执行已验证。
+本机已安装 `google-colab-cli` 0.7.4，OAuth2 授权已完成。CPU smoke test 成功返回 `2`，并已停止测试会话。验证后仍能看到一个此前已存在、标记为 `[?]` 的 A100 高内存会话；本次测试没有创建或停止它，见 [TODO.md](./TODO.md)。
 
 ## 最短 CPU 流程
 
-首次使用时先启动 OAuth2 授权。你需要在浏览器中选择 Google 账号并同意授权，再把页面返回的代码粘贴到本地终端。此步骤不会创建 runtime：
+这台 Mac 已完成首次 OAuth2 授权。在另一台机器或本地 token 被清除后，可运行下面的命令重新授权。你需要在浏览器中选择 Google 账号并同意，再把页面返回的代码粘贴到本地终端；此步骤不会创建 runtime：
 
 ```sh
 colab --auth=oauth2 sessions

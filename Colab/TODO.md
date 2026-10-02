@@ -2,7 +2,7 @@
 
 ## 当前使用状态
 
-尚未完成 Google OAuth 授权或创建云端 runtime；目前没有请求或使用任何付费、GPU、TPU 或 high-memory 资源。
+Google OAuth2 授权已完成，CPU smoke test 已通过并停止。本次测试只申请了标准 CPU runtime，没有请求 GPU、TPU 或 high-memory 资源。测试前后 `colab sessions` 都显示一个此前已存在、标记为 `[?]` 的 A100 高内存会话；本次操作未创建或停止该会话。
 
 ## 已完成
 
@@ -11,23 +11,12 @@
 - [x] 确认 `~/.local/bin/colab` 已在 `PATH` 中。
 - [x] 本地检查 `uv --version`、`colab version` 和 `colab --help`。
 - [x] 核对 `colab --help` 中的认证选项，确认该安装版本默认使用 OAuth2；确认本机没有 `gcloud`。OAuth2 流程不依赖安装 gcloud。
+- [x] 完成首次 Google OAuth2 授权，并运行 `colab --auth=oauth2 sessions` 确认能读取当前会话。
+- [x] 创建 `useful-commands-smoke` 标准 CPU 会话，执行 `print(1 + 1)` 得到 `2`，确认状态为 IDLE 后停止会话；后续会话列表中不再显示该 smoke test 会话。
 
-## 尚待本人操作
+## 尚待本人确认
 
-- [ ] **首次 Google OAuth2 授权**：在本机终端运行下列命令；打开显示的 Google 授权链接，选择账号并同意，然后把网页返回的代码粘贴回该终端。这个步骤只认证并列出会话，不会创建 VM；此安装使用包内 OAuth client 配置，无需另行准备 JSON 文件。
-
-  ```sh
-  colab --auth=oauth2 sessions
-  ```
-
-- [ ] **CPU 云端 smoke test**：首次授权完成后逐条运行下列命令。确认输出为 `2`，检查状态，再停止具名会话释放资源。若授权或分配失败，不要把测试标记为通过。
-
-  ```sh
-  colab --auth=oauth2 new -s useful-commands-smoke
-  printf 'print(1 + 1)\n' | colab --auth=oauth2 exec -s useful-commands-smoke
-  colab --auth=oauth2 status -s useful-commands-smoke
-  colab --auth=oauth2 stop -s useful-commands-smoke
-  ```
+- [ ] **确认遗留 A100 会话**：查看 Google Colab 是否仍在使用 A100 高内存会话。CLI 将没有本地 session 记录的服务端 assignment 标记为 `[?]`；如果该会话不是你正在使用的，请在确认后自行停止，避免继续占用额度。
 
 ## 后续评估
 

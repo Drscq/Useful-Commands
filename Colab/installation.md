@@ -44,9 +44,24 @@ colab --auth=adc sessions
 
 本机没有安装 `gcloud`。使用上面的 OAuth2 流程不需要安装 Google Cloud SDK，因此没有为此任务安装它。
 
+## 云端 CPU smoke test
+
+首次 Google OAuth2 授权完成后，使用具名标准 CPU session 验证远端执行：
+
+```sh
+colab --auth=oauth2 new -s useful-commands-smoke
+printf 'print(1 + 1)\n' | colab --auth=oauth2 exec -s useful-commands-smoke
+colab --auth=oauth2 status -s useful-commands-smoke
+colab --auth=oauth2 stop -s useful-commands-smoke
+```
+
+结果：`new` 返回 `Session READY`；`exec` 输出 `2`；`status` 显示 `Hardware: CPU`、`Shape: Standard`、`Status: IDLE`；`stop` 返回 `Session terminated`。之后检查 `colab --auth=oauth2 sessions`，测试会话已不再列出。本次 smoke test 只使用标准 CPU，没有请求 GPU、TPU 或 high-memory runtime。
+
+会话列表同时显示一个此前已存在、标记为 `[?]` 的 A100 高内存 assignment；本次测试没有创建或停止它。由于它没有对应的本地 session 记录，是否仍在使用需要账号所有者确认，详见 [TODO.md](./TODO.md)。
+
 ## 验证边界
 
-本机确认了安装、版本命令和 CLI 帮助。尚未执行首次 Google OAuth 授权，也没有创建或运行云端 runtime；`gcloud` 不存在。云端 CPU smoke test 留在 [TODO.md](./TODO.md) 中，不能将本地 CLI 验证当作云端验证结果。
+本机安装、版本命令、CLI 帮助、Google OAuth2 授权和 CPU 远端执行均已验证。安装与 smoke test 没有请求 GPU、TPU 或 high-memory 资源，也没有发起付费升级。`gcloud` 未安装，但这不影响本次使用 OAuth2 的 CLI 流程。
 
 ## 升级与卸载
 
